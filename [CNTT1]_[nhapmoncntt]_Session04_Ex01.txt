@@ -1,0 +1,18 @@
+Phần 1: Phân tích lỗi sai trong chuỗi thao tác của Nam
+Trong quá trình thao tác trên Windows PowerShell, Nam đã mắc phải 3 lỗi logic và cú pháp phổ biến sau:
+Lỗi đặt tên thư mục chứa khoảng trắng không dùng dấu ngoặc bọc (" " hoặc ' ')
+Nguyên nhân: Khi tạo hoặc truy cập các thư mục có khoảng trắng (ví dụ: "Shopee Lite" hoặc "Admin Frontend"), PowerShell hiểu khoảng trắng là dấu phân cách giữa các tham số riêng biệt.
+Giải thích thông báo lỗi: Terminal báo "A positional parameter cannot be found that accepts argument '...'" do hiểu chữ đứng sau khoảng trắng (như Lite hay Frontend) là một tham số không hợp lệ.
+Lỗi chuyển thư mục (cd) vào đường dẫn chưa tồn tại hoặc sai vị trí
+Nguyên nhân: Nam dùng lệnh cd để di chuyển vào thư mục con khi chưa khởi tạo nó, hoặc gọi đường dẫn tương đối khi đang đứng sai thư mục hiện hành.
+Giải thích thông báo lỗi: Terminal báo "Cannot find path '...' because it does not exist" vì PowerShell không tìm thấy thư mục đích tại vị trí hiện tại.
+Lỗi sao chép (cp / Copy-Item) sai cú pháp để tạo cấu trúc thư mục
+Nguyên nhân: Thay vì dùng mkdir để tạo trực tiếp thư mục, Nam dùng cp / Copy-Item để nhân bản khi thư mục nguồn chưa tồn tại hoặc quên truyền tham số -Recurse khi thao tác với thư mục.
+Phần 2: Chuỗi câu lệnh PowerShell chuẩn (3 dòng lệnh)
+Dòng 1: Tạo thư mục gốc dự án và các thư mục chính (dùng ngoặc kép bọc tên có khoảng trắng)
+mkdir "Shopee-Lite", "Shopee-Lite/Admin Frontend", "Shopee-Lite/User Frontend", "Shopee-Lite/Backend API"
+Dòng 2: Tạo đồng thời toàn bộ các thư mục con bên trong
+mkdir "Shopee-Lite/Admin Frontend/src", "Shopee-Lite/User Frontend/src", "Shopee-Lite/Backend API/src", "Shopee-Lite/Backend API/config"
+Dòng 3: Di chuyển vào thư mục gốc dự án để làm việc
+cd "Shopee-Lite"
+
